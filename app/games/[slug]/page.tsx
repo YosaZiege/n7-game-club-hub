@@ -12,17 +12,13 @@ export function generateStaticParams() {
    return slugs
 }
 
-export default function GamePage({
-   params,
-}: {
-   params: { slug: string }
-}) {
-   const gameUrl = `/games/${params.slug}/index.html`
+export default function GamePage() {
 
+   const gameUrl = `/games/test/BlindCowboy.html`
    return (
       <div className="min-h-screen bg-zinc-900 text-white flex flex-col">
          <div className="p-4 bg-zinc-800 flex justify-between">
-
+            <h1 className="text-center font-bold text-blue-500 w-full">N7 Game Hub - BlindCowboy</h1>
          </div>
 
          <div className="flex-1 flex justify-center items-center p-4">
