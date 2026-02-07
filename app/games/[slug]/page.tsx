@@ -1,21 +1,42 @@
-import FullScreenButton from "@/components/FullScreenButton";
+import fs from "fs"
+import path from "path"
 
-export default async function Page({ params }: { params: string }) {
+export function generateStaticParams() {
+   const gamesDir = path.join(process.cwd(), "public/games")
 
-   const slug = await params;
-   const gameUrl = `/games/${slug}/BlindCowboy.html`
+   const slugs = fs
+      .readdirSync(gamesDir, { withFileTypes: true })
+      .filter((d) => d.isDirectory())
+      .map((d) => ({ slug: d.name }))
+
+   return slugs
+}
+
+export default function GamePage({
+   params,
+}: {
+   params: { slug: string }
+}) {
+   const gameUrl = `/games/${params.slug}/index.html`
+
    return (
-      <div className="w-full h-screen ml-20 p-10">
-         <h1 className="font-bold text-xl text-blue-500 text-center">N7-Game Club Hub</h1>
+      <div className="min-h-screen bg-zinc-900 text-white flex flex-col">
+         <div className="p-4 bg-zinc-800 flex justify-between">
+            <h1 className="font-bold capitalize">
+               {params.slug.replace(/-/g, " ")}
+            </h1>
+         </div>
 
-         <FullScreenButton />
-
-         <iframe
-            id="game-frame"
-            src={gameUrl}
-            className=" w-full p-6 mx-auto max-w-6xl h-min-screen h-full"
-            allow="fullscreen"
-         />
+         <div className="flex-1 flex justify-center items-center p-4">
+            <div className="w-full max-w-5xl aspect-video bg-black">
+               <iframe
+                  src={gameUrl}
+                  className="w-full h-full border-none"
+                  allow="fullscreen"
+               />
+            </div>
+         </div>
       </div>
    )
 }
+
