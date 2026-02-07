@@ -22,9 +22,7 @@ export default function GamePage({
    return (
       <div className="min-h-screen bg-zinc-900 text-white flex flex-col">
          <div className="p-4 bg-zinc-800 flex justify-between">
-            <h1 className="font-bold capitalize">
-               {params.slug.replace(/-/g, " ")}
-            </h1>
+
          </div>
 
          <div className="flex-1 flex justify-center items-center p-4">
