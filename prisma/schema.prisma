@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+ output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id             String   @id @default(cuid())
+  email          String   @unique
+  username       String   @unique
+  hashedPassword String?
+  googleId       String?
+  role           Role     @default(STUDENT)
+  createdAt      DateTime @default(now())
+
+  games          Game[]
+}
+
+model Game {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  imageUrl    String?
+  approved    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  creator     User     @relation(fields: [creatorId], references: [id])
+  creatorId   String
+}
+
+enum Role {
+  STUDENT
+  ADMIN
+  N7_CLUB_MEMBER
+}
+
