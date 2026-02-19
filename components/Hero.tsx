@@ -1,5 +1,6 @@
 import { ArrowRight, Upload } from "lucide-react"
 import { Button } from "./ui/button"
+import Link from "next/link"
 
 const Hero = () => {
   return (
@@ -9,7 +10,7 @@ const Hero = () => {
          <p className="font-mono text-gray-500 lg:text-xl text-lg">Discover, Play and Share Incredible Indie Games</p>
          <div className="flex space-x-2">
          <Button className="w-fit py-6 px-8 lg:px-12  bg-blue-500 shadow-sm hover:bg-blue-600"><a href="#games"> Explore Games</a> <ArrowRight /></Button>
-         <Button className="w-fit py-6 px-8 lg:px-12 hover:bg-gray-200" variant="outline" > <Upload/> Upload Your Game</Button>
+         <Link href={"/upload"}><Button className="w-fit py-6 px-8 lg:px-12 hover:bg-gray-200" variant="outline" > <Upload/> Upload Your Game</Button></Link>
 </div>
       </div>
   )

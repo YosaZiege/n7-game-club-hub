@@ -20,7 +20,7 @@ const Navbar = () => {
             <Link href="/">  <Image src="logo.svg" alt="logo N7GC" width={80} height={80} /></Link> 
             </div>
             <div className="hidden md:flex flex-row gap-6  items-center">
-               <Link href={"/gallery"}>  <p className="navbar-tag"> Game Gallery</p></Link>
+            {/* <Link href={"/gallery"}>  <p className="navbar-tag"> Game Gallery</p></Link>*/}
                <Link href={`/upload`} >               <p className="navbar-tag">Upload Game</p></Link>
                <AuthAction variant="desktop"></AuthAction>
             </div>

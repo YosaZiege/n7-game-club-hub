@@ -11,7 +11,7 @@ const page = () => {
             <Hero />
             <ListOfGames />
          </div>
-         <Footer />
+         {/*<Footer />*/}
       </div>
    )
 }

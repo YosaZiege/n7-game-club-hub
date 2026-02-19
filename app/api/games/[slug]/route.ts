@@ -16,6 +16,7 @@ export async function GET(
       zipUrl: true,
       imageUrl: true,
       creatorImage: true,
+         entryFile: true,
       creator: { select: { username: true } },
       tags: { select: { tag: { select: { name: true } } } },
     },

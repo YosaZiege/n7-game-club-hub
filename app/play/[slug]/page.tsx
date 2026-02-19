@@ -1,3 +1,5 @@
+import GamePlayer from "@/components/GamePlayer";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 type Game = {
@@ -5,6 +7,7 @@ type Game = {
   slug: string;
   zipUrl: string;
   imageUrl?: string | null;
+  entryFile: string;
   description?: string | null;
   creator: { username?: string | null };
 };
@@ -26,11 +29,12 @@ export default async function GamePage({
     return notFound();
   }
   const game = await getGame(slug);
+   console.log(game)
    if (!game) return notFound();
 
   // For now: assume you extracted ZIP to /public/games/[slug]/index.html
-  const gameUrl = `/games/${game.slug}/index.html`;
-
+    const gameUrl = `/games/${game.slug}/${game.entryFile}`;
+   
   return (
     <div className="min-h-screen bg-zinc-900 text-white flex flex-col">
       <div className="p-4 bg-zinc-800 flex items-center justify-between">
@@ -38,6 +42,11 @@ export default async function GamePage({
         <span className="text-sm text-zinc-400">
           by {game.creator?.username ?? "Unknown"}
         </span>
+            <Link href="/">
+            <span>
+               Return Home
+            </span>
+</Link>
       </div>
 
       <div className="flex-1 flex flex-col items-center justify-center p-4 gap-4">
@@ -48,11 +57,7 @@ export default async function GamePage({
         )}
 
         <div className="w-full max-w-5xl aspect-video bg-black rounded-xl overflow-hidden">
-          <iframe
-            src={gameUrl}
-            className="w-full h-full border-none"
-            allow="fullscreen"
-          />
+         <GamePlayer src={gameUrl}/>
         </div>
       </div>
     </div>

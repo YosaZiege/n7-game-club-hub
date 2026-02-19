@@ -11,6 +11,7 @@ export async function GET() {
       slug: true,
       imageUrl: true,
       createdAt: true,
+      entryFile: true,
       creator: { select: { username: true } },
       tags: { select: { tag: { select: { name: true } } } },
     },

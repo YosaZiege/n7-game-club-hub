@@ -37,7 +37,6 @@ export default function Page() {
   const [title, setTitle] = useState("");
   const [creator, setCreator] = useState("");
   const session = useSession();
-   console.log(session);
   const creatorLocked = session?.data?.user?.username || "Unknown";
   // Optional extra info
   const [description, setDescription] = useState("");
