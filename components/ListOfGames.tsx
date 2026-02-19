@@ -20,7 +20,7 @@ type Game = {
 };
 
 async function getGames(): Promise<Game[]> {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+  const baseUrl = process.env.NEXTAUTH_URL ?? "http://localhost:3000";
   const res = await fetch(`${baseUrl}/api/games`, {
     // static by default; use revalidate if you want ISR
       cache: "no-store",
