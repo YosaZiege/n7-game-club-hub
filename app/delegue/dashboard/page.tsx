@@ -1,5 +1,10 @@
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+
 import { prisma } from "@/lib/prisma";
 import DelegueTable from "./table";
+
 
 export default async function Page() {
   const games = await prisma.game.findMany({
