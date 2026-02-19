@@ -13,7 +13,7 @@ type Game = {
 };
 
 async function getGame(slug: string): Promise<Game | null> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"}/api/games/${slug}`)
+  const res = await fetch(`${process.env.NEXTAUTH_URL ?? "http://localhost:3000"}/api/games/${slug}`)
 
   if (!res.ok) return null;
   return res.json();
