@@ -11,32 +11,46 @@ datasource db {
 }
 
 model User {
-  id             String   @id @default(cuid())
-  email          String   @unique
-  username       String   @unique
+  id             String  @id @default(cuid())
+  email          String  @unique
+  username       String?
   hashedPassword String?
   googleId       String?
-  role           Role     @default(STUDENT)
-  createdAt      DateTime @default(now())
-
+  role           String  @default("STUDENT")
+  createdAt       DateTime  @default(now())
   games          Game[]
 }
 
 model Game {
-  id          String   @id @default(cuid())
-  title       String
-  description String?
-  imageUrl    String?
-  approved    Boolean  @default(false)
-  createdAt   DateTime @default(now())
+  id           String   @id @default(cuid())
+  title        String
+  slug         String   @unique   // <- add this
+  description  String?
+  imageUrl     String?
+  zipUrl       String
+  creatorImage String?
+  approved     Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  entryFile String @default("index.html")
+  creatorId    String
+  creator      User     @relation(fields: [creatorId], references: [id])
 
-  creator     User     @relation(fields: [creatorId], references: [id])
-  creatorId   String
+  tags         GameTag[]
 }
 
-enum Role {
-  STUDENT
-  ADMIN
-  N7_CLUB_MEMBER
+model Tag {
+  id    String   @id @default(cuid())
+  name  String   @unique
+  games GameTag[]
+}
+
+model GameTag {
+  gameId String
+  tagId  String
+
+  game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  tag  Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([gameId, tagId])
 }
 

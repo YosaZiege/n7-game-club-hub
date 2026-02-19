@@ -1,17 +1,13 @@
 import { encrypt, decrypt } from "paseto-ts/v4";
 
-// Store this in .env as a PASERK string: k4.local.xxxxx
-// Generate once with: import { generateKeys } from "paseto-ts/v4"; generateKeys("local")
-const key = process.env.PASETO_KEY!; // k4.local.xxxxx format
+const key: any = process.env.PASETO_SECRET_KEY;
+if (!key) throw new Error("Missing PASETO_LOCAL_KEY");
 
 export async function signToken(payload: Record<string, unknown>) {
-  return encrypt(key, {
-    ...payload,
-    exp: "15 minutes",  
-   });
+
+   return encrypt(key, payload);
 }
 
-
 export async function verifyToken(token: string) {
-  return decrypt(key, token);
+   return decrypt(key, token);
 }

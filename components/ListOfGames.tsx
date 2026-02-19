@@ -17,7 +17,7 @@ import { Badge } from "./ui/badge";
 const ListOfGames = () => {
    const game_cards: GameCardData[] = gameCardData;
    return (
-      <div className="flex flex-col gap-4 justify-center items-center w-full ">
+      <div id="games" className="flex flex-col gap-4 justify-center items-center w-full ">
          <p className="text-4xl font-bold text-center ">Featured Games</p>
          <p className="text-md font-semibold text-gray-500 text-center "> Discover some of the games from the community</p>
          <div className=" flex flex-row justify-between gap-y-4 flex-wrap">

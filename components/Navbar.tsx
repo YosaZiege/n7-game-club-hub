@@ -15,16 +15,13 @@ const Navbar = () => {
    const imageUrl = "./images/cover.svg"
    
    return (
-      <>      <div className="relative " >
-         <div style={{ backgroundImage: `url('${imageUrl}')` }} className="absolute inset-0 bg-cover bg-center -z-10"></div>
-      </div>
-         <div className="flex flex-row w-full mx-auto px-4 items-center p-2 justify-between border-b">
+         <div className="flex flex-row w-full mx-auto px-4 items-center p-2 justify-between border-b  ">
             <div className="cursor-pointer">
-               <Image src="logo.svg" alt="logo N7GC" width={80} height={80} />
+            <Link href="/">  <Image src="logo.svg" alt="logo N7GC" width={80} height={80} /></Link> 
             </div>
             <div className="hidden md:flex flex-row gap-6  items-center">
                <Link href={"/gallery"}>  <p className="navbar-tag"> Game Gallery</p></Link>
-               <Link href={`/upload/${user}`} >               <p className="navbar-tag">Upload Game</p></Link>
+               <Link href={`/upload`} >               <p className="navbar-tag">Upload Game</p></Link>
                <AuthAction variant="desktop"></AuthAction>
             </div>
             <div className="md:hidden display ">
@@ -44,8 +41,6 @@ const Navbar = () => {
                </Sheet>
             </div>
          </div>
-      </>
-
    )
 }
 
