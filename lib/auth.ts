@@ -4,7 +4,28 @@ import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import type { NextAuthOptions } from "next-auth";
 import argon2 from "argon2";
+export async function ensureAdminExists() {
+  const adminEmail = "admin@n7gamehub.com";
 
+  const existing = await prisma.user.findUnique({
+    where: { email: adminEmail },
+  });
+
+  if (!existing) {
+    const hashedPassword = await argon2.hash("ChangeThisPassword123!");
+
+    await prisma.user.create({
+      data: {
+        email: adminEmail,
+        username: "president",
+        hashedPassword,
+        role: "president",
+      },
+    });
+
+    console.log("Admin auto-created");
+  }
+}
 export const authOptions: NextAuthOptions = {
    providers: [
       GoogleProvider({
