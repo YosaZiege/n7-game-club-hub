@@ -1,11 +1,15 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../lib/generated/prisma/client";
 import argon2 from "argon2";
+import { PrismaPg } from '@prisma/adapter-pg'
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL!,
+})
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({adapter});
 
 async function main() {
   const adminEmail = "admin@n7gamehub.com";
-  const adminPassword = "ChangeThisPassword123!"; // change later
+  const adminPassword = "ChangeThisPassword123!"; // change after first login
 
   const existing = await prisma.user.findUnique({
     where: { email: adminEmail },
@@ -38,4 +42,3 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
-
