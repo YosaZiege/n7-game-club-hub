@@ -1,0 +1,12 @@
+services:
+  web:
+    build:
+      context: .
+      args:
+        PASETO_LOCAL_KEY: ${PASETO_LOCAL_KEY}
+    container_name: next-app
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"

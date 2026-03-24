@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-   typescript: {
+  output: "standalone",
+  typescript: {
     ignoreBuildErrors: true,
   },
-    images: {
+  images: {
     remotePatterns: [
       {
         protocol: "https",

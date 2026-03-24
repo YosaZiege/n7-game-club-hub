@@ -1,13 +1,15 @@
 import { encrypt, decrypt } from "paseto-ts/v4";
 
-const key: any = process.env.PASETO_SECRET_KEY;
-if (!key) throw new Error("Missing PASETO_LOCAL_KEY");
+function getKey(): string {
+  const key = process.env.PASETO_SECRET_KEY;
+  if (!key) throw new Error("Missing PASETO_LOCAL_KEY");
+  return key;
+}
 
 export async function signToken(payload: Record<string, unknown>) {
-
-   return encrypt(key, payload);
+  return encrypt(getKey(), payload);
 }
 
 export async function verifyToken(token: string) {
-   return decrypt(key, token);
+  return decrypt(getKey(), token);
 }
